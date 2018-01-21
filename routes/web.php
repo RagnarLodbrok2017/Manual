@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login', function () {
+    return view('login');
+});
+Route::post('/signup', 'Register@create');
+Route::post('/login', 'Register@check');
+Route::resource('car','CarController');
