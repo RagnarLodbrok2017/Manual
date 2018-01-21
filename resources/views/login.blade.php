@@ -25,6 +25,27 @@
                 <label>Enter The Password : </label>{!! Form::password('password',["class"=>"form-control", "placeholder"=>"Password:"] ) !!}
             </div>
             <div class="form-group">
+                @if ($errors->has('username'))
+                    <span class="help-block">
+                        <strong class="alert alert-danger">{{ $errors->first('username') }}</strong>
+                    </span>
+                @endif
+            </div>
+            <div class="form-group">
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong class="alert alert-danger">{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+            </div>
+            <div class="form-group">
+                @if (isset($error))
+                    <span class="help-block">
+                        <strong class="alert alert-danger">{{ $error }}</strong>
+                    </span>
+                @endif
+            </div>
+            <div class="form-group">
                 {!! Form::submit('Login',["class"=>"btn btn-success"]) !!}
             </div>
             {!! Form::close() !!}

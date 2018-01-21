@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login');
 });
-Route::post('/signup', 'Register@create');
-Route::post('/login', 'Register@check');
-Route::resource('car','CarController');
+
+Route::post('/signup', 'RegisterLoginController@create');
+Route::post('/login', 'RegisterLoginController@check');
+Route::resource('cars','CarController');
