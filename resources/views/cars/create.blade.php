@@ -28,6 +28,9 @@
             <div class="form-group">
                 <label>upload the Logo: </label>{{ Form::file('logo', ['class' => 'field form-control']) }}
             </div>
+            <div class="form-group">
+                <label>upload the Images Of Car: </label>{{ Form::file('images[]', ['class' => 'field form-control', "multiple"]) }}
+            </div>
         <div class="form-group">
             @if ($errors->has('name'))
                 <span class="help-block">
@@ -63,6 +66,13 @@
                     </span>
             @endif
         </div>
+            <div class="form-group">
+                @if ($errors->has('images'))
+                    <span class="help-block">
+                        <strong class="alert alert-danger">{{ $errors->first('images') }}</strong>
+                    </span>
+                @endif
+            </div>
             <div class="form-group">
             {!! Form::submit('add',["class"=>"btn btn-success"]) !!}
             </div>

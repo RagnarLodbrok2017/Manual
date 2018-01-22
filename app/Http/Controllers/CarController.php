@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use App\Category;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use File;
@@ -27,11 +28,12 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, array(
+        $validator = $this->validate($request, array(
             'name' => 'required|string|max:255|unique:cars',
             'price'=> 'required|numeric|min:100000',
             'logo' => 'required|mimes:jpeg,jpg,png',
-            'description' => 'required|string|max:255',
+            "images.*" => 'sometimes|mimes:jpeg,jpg,png',
+            'description' => 'sometimes|nullable|string|max:255',
             'tax'=> 'sometimes|nullable|integer|numeric|max:100',
             'category_id'=>'numeric'
         ));
@@ -41,17 +43,36 @@ class CarController extends Controller
         $car->price = $request->price;
         $car->tax = $request->tax;
         $car->category_id = $request->category_id;
+        //logo
         $logo = Input::file('logo');
         $logoName = $request->name . '.' . $logo->getClientOriginalExtension();
         $car->logo = $logoName;
         $logo->move(public_path('/uploads/logo'), $logoName);
         $car->save();
+        //images
+        //$images = Input::file('images[]');
+        $i = 0;
+        if($images=$request->file('images')) {
+            var_dump($images);
+            foreach ($images as $image) {
+                $imageName = $car->name . $i . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('/uploads/images'), $imageName);
+                $i++;
+                if($validator) {
+                    $imageDB = new Image();
+                    $imageDB->title = $imageName;
+                    $imageDB->car_id = $car->id;
+                    $imageDB->save();
+                }
+            }
+        }
         return back()->with('status', 'Car Added Successfully!');
     }
 
     public function show($id)
     {
-        //
+        $car = Car::find($id);
+        return view("cars/carShow",compact('car'));
     }
 
     public function edit($id)
@@ -74,6 +95,7 @@ class CarController extends Controller
         ));
         $car = Car::find($id);
         if( Input::hasFile('logo') ){
+            File::delete($car->logo);
             $logo = Input::file('logo');
             $logoName = $request->name . '.' . $logo->getClientOriginalExtension();
             $car->logo = $logoName;
@@ -99,7 +121,16 @@ class CarController extends Controller
     public function destroy($id)
     {
         $car = Car::find($id);
+        File::delete(public_path("uploads/logo/$car->logo"));
         $car->delete();
+        //delete the car'images
+        $images = Image::all()->where('car_id',$id);
+        if($images) {
+            foreach ($images as $image) {
+                File::delete(public_path("uploads/images/$image->title"));
+                $image->delete();
+            }
+        }
         return redirect('./cars');
     }
 }
