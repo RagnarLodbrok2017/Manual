@@ -53,16 +53,6 @@
     <div class="navbar-more-overlay"></div>
     <nav class="navbar navbar-inverse navbar-fixed-top animate">
         <div class="container navbar-more visible-xs">
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-							<button class="btn btn-default" type="submit">Submit</button>
-						</span>
-                    </div>
-                </div>
-            </form>
             <ul class="nav navbar-nav">
                 <li>
                     <a href="#">
@@ -158,8 +148,7 @@
             <ul class="nav navbar-nav navbar-right mobile-bar">
                 <li>
                     <a href="../cars">
-                        <span class="menu-icon fa fa-home"></span>
-                        Home
+                        <strong class="menu-icon fa fa-home">Home</strong>
                     </a>
                 </li>
                 <li>
