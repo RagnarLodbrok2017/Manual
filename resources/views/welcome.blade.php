@@ -28,7 +28,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 24px;
             }
 
             .links > a {
@@ -152,12 +152,12 @@
         </div>
         <div class="container">
             <div class="navbar-header hidden-xs">
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="../">Cars Agency</a>
             </div>
 
             <ul class="nav navbar-nav navbar-right mobile-bar">
                 <li>
-                    <a href="#">
+                    <a href="../cars">
                         <span class="menu-icon fa fa-home"></span>
                         Home
                     </a>
@@ -187,13 +187,24 @@
                         Reservations
                     </a>
                 </li>
+                @guest
                 <li>
                     <a href="login">
-                        <span class="menu-icon fa fa-phone"></span>
                         <strong class="hidden-xs">Login</strong>
-                        <span class="visible-xs">Contact</span>
                     </a>
                 </li>
+                @else
+                    <li>
+                        <a href="../logout"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <strong>Logout </strong>( {{Auth::user()->name}} )
+                        </a>
+                        <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                @endguest
                 <li class="visible-xs">
                     <a href="#navbar-more-show">
                         <span class="menu-icon fa fa-bars"></span>
@@ -203,11 +214,13 @@
             </ul>
         </div>
     </nav>
-            <div class="content">
-                <div class="title m-b-md">
-                    Cars Agency
-                </div>
-            </div>
-        </div>
+            {{--<div class="content">--}}
+                {{--<div class="title m-b-md">--}}
+                    {{--Cars Agency--}}
+                    {{--<br>--}}
+                    {{--Welcome <strong>{{Auth::user()->name}}</strong>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+    @yield('nav')
     </body>
 </html>

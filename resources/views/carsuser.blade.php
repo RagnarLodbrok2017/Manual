@@ -1,7 +1,7 @@
-@extends('layouts.app')
-@section('content')
+@extends('welcome')
+@section('nav')
 @endsection
-<div class="container">
+<div class="container" style="margin-top: 50px;">
     <h2>Cars Main Page For Users</h2>
         <div class="row">
             <div class='list-group gallery'>
