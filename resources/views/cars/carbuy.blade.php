@@ -30,7 +30,4 @@
                     @endif
         </div> <!-- list-group / end -->
     </div> <!-- row / end -->
-    @if(Auth::user() && Auth::user()->admin == 1)
-    <a href="../cars/create" class="btn btn-default">Create Car</a>
-        @endif
 </div>

@@ -8,14 +8,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Middleware;
 
 class RegisterLoginController extends Controller
 {
     public function __construct()
     {
-
+        $this->middleware('guest')->except('getLogout');
+//        if (Auth::guest())
+//            return Redirect::to('../login');
+//        return Redirect::to('../cars');
     }
+public function showLogin(){
+    return view('../login');
+}
     public function create(Request $request){
         $this->validate($request, [
             'name' => 'required|string|max:255',
@@ -50,15 +58,29 @@ class RegisterLoginController extends Controller
         {
             return Redirect::to('login')->WithErrors($validator);
         }else{
-            if($user){
-                if (Hash::check($request->password , $user->password)){
-                    return view('cars');
-                }else{
-                    return back();
-                }
+            if(Auth::attempt(['username'=>$request->username, 'password'=> $request->password, 'admin'=> 1])) {
+                return Redirect::to('../cars');
+            }elseif (Auth::attempt(['username'=>$request->username, 'password'=> $request->password, 'admin'=> 0])){
+                return Redirect::to('../carsuser');
             }else{
                 return back();
             }
+//            if($user){
+//                    if (Hash::check($request->password , $user->password)){
+//                        return Redirect::to('../cars');
+//                    }else{
+//                        return back();
+//                    }
+//            }else{
+//                return back();
+//            }
         }
+    }
+    public function getLogout()
+    {
+        Auth::logout();
+        Session::flush();
+        //return Redirect::route('login');
+        return Redirect::to('../login');
     }
 }

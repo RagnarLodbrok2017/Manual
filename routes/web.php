@@ -14,10 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login', function () {
-    return view('login');
-});
+Auth::routes();
+Route::post('/logout', 'RegisterLoginController@getLogout');
+Route::get('login', 'RegisterLoginController@showLogin');
 
 Route::post('/signup', 'RegisterLoginController@create');
 Route::post('/login', 'RegisterLoginController@check');
 Route::resource('cars','CarController');
+Route::resource('carsuser','CarsUserController');
+Route::get('carsuser/{id}/buy','CarsUserController@buy');

@@ -8,8 +8,16 @@ use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use File;
+use Illuminate\Support\Facades\Middleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 class CarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
 
     public function index()
     {
@@ -72,7 +80,8 @@ class CarController extends Controller
     public function show($id)
     {
         $car = Car::find($id);
-        return view("cars/carShow",compact('car'));
+        $images = Image::all()->where('car_id', $id);
+        return view("cars/carShow",compact('car','images'));
     }
 
     public function edit($id)
@@ -81,7 +90,6 @@ class CarController extends Controller
         $car = Car::find($id);
         return view('cars/edit',compact('car','categories'));
     }
-
 
     public function update(Request $request, $id)
     {
