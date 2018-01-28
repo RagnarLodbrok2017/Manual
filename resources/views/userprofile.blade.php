@@ -20,7 +20,7 @@
             @foreach($soldcars as $soldcar)
                 <tr>
                     <th scope="row">{{$soldcar->id}}</th>
-                    <td>{{$soldcar->car_id}}</td>
+                    <td>{{$soldcar->sold_cars_id}}</td>
                     <td>{{$soldcar->user_id}}</td>
                     <td>{{$soldcar->total_price}}</td>
                     <td>{{$soldcar->car->name}}</td>
