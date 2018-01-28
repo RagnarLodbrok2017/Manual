@@ -6,10 +6,12 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>#</th>
+            <th>Transaction ID:</th>
             <th>Car ID:</th>
             <th>User ID:</th>
             <th>Finall Price:</th>
+            <th>Car Name:</th>
+            <th>Category Title:</th>
             <th>Delete:</th>
         </tr>
         </thead>
@@ -17,10 +19,12 @@
         @if(isset($soldcars))
             @foreach($soldcars as $soldcar)
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{$soldcar->id}}</th>
                     <td>{{$soldcar->car_id}}</td>
                     <td>{{$soldcar->user_id}}</td>
                     <td>{{$soldcar->total_price}}</td>
+                    <td>{{$soldcar->car->name}}</td>
+                    <td>{{$soldcar->category->name}}</td>
                     <td>
                         {!! Form::open(['url'=>"carsuser/{$soldcar->id}", 'method'=>'DELETE'])!!}
                         {!! Form::submit('Delete',["class"=>"btn btn-danger"]) !!}
