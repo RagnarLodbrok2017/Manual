@@ -8,6 +8,7 @@ use App\Image;
 use App\SoldCars;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CarsUserController extends Controller
 {
@@ -66,7 +67,9 @@ class CarsUserController extends Controller
 
     public function destroy($id)
     {
-        //
+        $soldcar = SoldCars::find($id);
+        $soldcar->delete();
+        return Redirect::to('../userprofile');
     }
     public function profile()
     {

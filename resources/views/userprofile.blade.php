@@ -24,7 +24,7 @@
                     <td>{{$soldcar->category->title}}</td>
                     <td>{{$soldcar->total_price}}</td>
                     <td>
-                        {!! Form::open(['url'=>"userprofile/{{$soldcar->id}}", 'method'=>'DELETE'])!!}
+                        {!! Form::open(['url'=>"carsuser/{{$soldcar->id}}", 'method'=>'DELETE'])!!}
                         {!! Form::submit('Delete',["class"=>"btn btn-danger"]) !!}
                         {!! Form::close() !!}
                     </td>
