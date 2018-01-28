@@ -26,7 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function soldcars(){
-        return $this->belongsTo('App\SoldCars');
+    public function cars()
+    {
+        return $this->belongsToMany('App\Car', 'soldcars', 'car_id', 'user_id');
     }
 }

@@ -23,8 +23,8 @@
                     <td>{{$soldcar->car_id}}</td>
                     <td>{{$soldcar->user_id}}</td>
                     <td>{{$soldcar->total_price}}</td>
-                    <td>{{$soldcar->car.name}}</td>
-                    <td>{{$soldcar->category.name}}</td>
+                    <td>{{$soldcar->car->name}}</td>
+                    <td>{{$soldcar->category->title}}</td>
                     <td>
                         {!! Form::open(['url'=>"carsuser/{$soldcar->id}", 'method'=>'DELETE'])!!}
                         {!! Form::submit('Delete',["class"=>"btn btn-danger"]) !!}

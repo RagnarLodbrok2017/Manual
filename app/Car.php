@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     protected $fillable = ['name', 'logo', 'description', 'data', 'price', 'tax',];
-    public function soldcars(){
-        return $this->belongsTo('App\SoldCars');
+    public function users(){
+        return $this->belongsToMany('App\User');
     }
 }
