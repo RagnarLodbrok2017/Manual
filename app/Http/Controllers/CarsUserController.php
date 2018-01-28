@@ -72,7 +72,6 @@ class CarsUserController extends Controller
     {
         $user = Auth::user();
         $soldcars = SoldCars::all()->where('user_id', $user->id);
-        dd($soldcars);
-        //return view("userprofile",compact('soldcars'));
+        return view("userprofile",compact('soldcars'));
     }
 }

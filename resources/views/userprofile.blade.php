@@ -2,5 +2,36 @@
 @section('nav')
 @endsection
 <div class="container" style="margin-top: 50px;">
-    <h2>{{Auth::user()->name}} Profile</h2>
+    <h2><strong>{{Auth::user()->name}} </strong> Profile:</h2>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Car ID:</th>
+            <th>Car Name:</th>
+            <th>Category Name:</th>
+            <th>Finall Price:</th>
+            <th>Delete:</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if(isset($soldcars))
+            @foreach($soldcars as $soldcar)
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{$soldcar->car_id}}</td>
+                    <td>{{$soldcar->car->name}}</td>
+                    <td>{{$soldcar->category->title}}</td>
+                    <td>{{$soldcar->total_price}}</td>
+                    <td>
+                        {!! Form::open(['url'=>"userprofile/{{$soldcar->id}}", 'method'=>'DELETE'])!!}
+                        {!! Form::submit('Delete',["class"=>"btn btn-danger"]) !!}
+                        {!! Form::close() !!}
+                    </td>
+                </tr>
+            @endforeach
+        @endif
+        <tr>
+        </tbody>
+    </table>
 </div>
