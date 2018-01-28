@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Car;
 use App\Category;
 use App\Image;
+use App\SoldCars;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CarsUserController extends Controller
 {
@@ -46,8 +48,15 @@ class CarsUserController extends Controller
     public function buy($id)
     {
         $car = Car::find($id);
-        $images = Image::all()->where('car_id', $id);
-        return view("cars.carbuy",compact('car','images'));
+        $user = Auth::user();
+        $sold = new SoldCars();
+        $sold->car_id = $car->id;
+        $sold->user_id = $user->id;
+        $sold->total_price = $car->price + ($car->price * 3/100);
+        $sold->save();
+        return back();
+        //$images = Image::all()->where('car_id', $id);
+        //return view("cars.carbuy",compact('car','images'));
     }
 
     public function update(Request $request, $id)
