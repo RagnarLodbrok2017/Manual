@@ -23,3 +23,4 @@ Route::post('/login', 'RegisterLoginController@check');
 Route::resource('cars','CarController');
 Route::resource('carsuser','CarsUserController');
 Route::get('carsuser/{id}/buy','CarsUserController@buy');
+Route::get('userprofile','CarsUserController@profile');
