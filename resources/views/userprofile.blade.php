@@ -2,7 +2,7 @@
 @section('nav')
 @endsection
 <div class="container" style="margin-top: 50px;">
-    <h2><strong>{{Auth::user()->name}} </strong> Profile:</h2>
+    <h2><strong> {{Auth::user()->name}} </strong> Profile:</h2>
     <table class="table table-hover">
         <thead>
         <tr>
