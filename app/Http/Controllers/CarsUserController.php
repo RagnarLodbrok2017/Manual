@@ -75,10 +75,6 @@ class CarsUserController extends Controller
     {
         $user = Auth::user();
         $soldcars = SoldCars::all()->where('user_id', $user->id);
-        foreach ($soldcars as $soldcar) {
-            $name = $soldcar->car_id->name;
-            dd($name);
-        }
-        //return view("userprofile",compact('soldcars'));
+        return view("userprofile",compact('soldcars'));
     }
 }
