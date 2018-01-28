@@ -20,8 +20,8 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>{{$soldcar->car_id}}</td>
-                    <td>{{$soldcar->car->name}}</td>
-                    <td>{{$soldcar->category->title}}</td>
+                    <td>{{$soldcar->car()->name}}</td>
+                    <td>{{$soldcar->category()->title}}</td>
                     <td>{{$soldcar->total_price}}</td>
                     <td>
                         {!! Form::open(['url'=>"carsuser/{{$soldcar->id}}", 'method'=>'DELETE'])!!}
