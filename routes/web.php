@@ -20,7 +20,13 @@ Route::get('login', 'RegisterLoginController@showLogin');
 
 Route::post('/signup', 'RegisterLoginController@create');
 Route::post('/login', 'RegisterLoginController@check');
+
 Route::resource('cars','CarController');
+Route::any('cars/{id}',[
+    'uses' => 'CarController@category',
+    'as' => 'cars',
+]);
+
 Route::resource('carsuser','CarsUserController');
 Route::get('carsuser/{id}/buy','CarsUserController@buy');
 Route::get('userprofile','CarsUserController@profile');

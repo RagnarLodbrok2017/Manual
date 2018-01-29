@@ -21,9 +21,19 @@ class CarController extends Controller
 
     public function index()
     {
-        $cars = Car::get();
-        if ($cars){
-            return view('cars',compact('cars'));
+        $categories = Category::orderBy('title', 'asc')->get();
+        $cars = Car::paginate(8);
+        if ($cars || $categories){
+            return view('cars',compact('cars','categories'));
+        }
+    }
+    //filter with paginate by category
+    public function category($id)
+    {
+        $categories = Category::orderBy('title', 'asc')->get();
+        $cars = Car::where('category_id', $id)->paginate(8);
+        if ($cars || $categories){
+            return view('cars',compact('cars','categories'));
         }
     }
 

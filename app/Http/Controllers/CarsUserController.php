@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Car;
 use App\Category;
 use App\Image;
-use App\SoldCars;
+use App\CarUserRelation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -19,7 +19,7 @@ class CarsUserController extends Controller
 
     public function index()
     {
-        $cars = Car::get();
+        $cars = Car::paginate(6);
         if ($cars){
             return view('carsuser',compact('cars'));
         }
@@ -50,7 +50,7 @@ class CarsUserController extends Controller
     {
         $car = Car::find($id);
         $user = Auth::user();
-        $sold = new SoldCars();
+        $sold = new CarUserRelation();
         $sold->car_id = $car->id;
         $sold->user_id = $user->id;
         $sold->total_price = $car->price + ($car->price * 3/100);
@@ -67,14 +67,14 @@ class CarsUserController extends Controller
 
     public function destroy($id)
     {
-        $soldcar = SoldCars::find($id);
+        $soldcar = CarUserRelation::find($id);
         $soldcar->delete();
         return Redirect::to('../userprofile');
     }
     public function profile()
     {
         $user = Auth::user();
-        $soldcars = SoldCars::all()->where('user_id', $user->id);
-        return view("userprofile",compact('soldcars'));
+        $soldcars = CarUserRelation::all()->where('user_id', $user->id);
+        return view("userprofile",compact('soldcars','user'));
     }
 }

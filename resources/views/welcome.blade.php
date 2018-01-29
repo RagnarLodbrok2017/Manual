@@ -152,10 +152,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <span class="menu-icon fa fa-info"></span>
-                        <span class="hidden-xs">About the Boat</span>
-                        <span class="visible-xs">About</span>
+                    <a href="../userprofile">
+                        <span class="hidden-xs">Profile</span>
                     </a>
                 </li>
                 <li class="hidden-xs">

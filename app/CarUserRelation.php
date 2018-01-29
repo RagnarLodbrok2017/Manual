@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
-class SoldCars extends Model
+class CarUserRelation extends Model
 {
-    public $table = "soldcars";
+    public $table = "car_user_relation";
     protected $fillable = ['id','car_id','user_id'];
 //    public function car(){
 //        return $this->hasMany('App\Car');

@@ -8,6 +8,7 @@
         <tr>
             <th>Transaction ID:</th>
             <th>Car ID:</th>
+            <th>Car Name:</th>
             <th>User ID:</th>
             <th>Finall Price:</th>
             <th>Delete:</th>
@@ -19,6 +20,7 @@
                 <tr>
                     <th scope="row">{{$soldcar->id}}</th>
                     <td>{{$soldcar->car_id}}</td>
+                    <td>{{$user->cars[$loop->index]->name}}</td>
                     <td>{{$soldcar->user_id}}</td>
                     <td>{{$soldcar->total_price}}</td>
                     <td>
@@ -32,4 +34,7 @@
         <tr>
         </tbody>
     </table>
+    {!! Form::open(['url'=>"carsuser", 'method'=>'GET'])!!}
+    {!! Form::submit('DONE',["class"=>"btn btn-success"]) !!}
+    {!! Form::close() !!}
 </div>
