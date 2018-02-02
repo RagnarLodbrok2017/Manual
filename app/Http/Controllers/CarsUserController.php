@@ -19,7 +19,7 @@ class CarsUserController extends Controller
 
     public function index()
     {
-        $cars = Car::paginate(6);
+        $cars = Car::paginate(8);
         if ($cars){
             return view('carsuser',compact('cars'));
         }

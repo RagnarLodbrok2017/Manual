@@ -21,14 +21,18 @@ class RegisterLoginController extends Controller
 //            return Redirect::to('../login');
 //        return Redirect::to('../cars');
     }
-public function showLogin(){
-    return view('../login');
-}
-    public function create(Request $request){
+
+    public function showLogin()
+    {
+        return view('../login');
+    }
+
+    public function create(Request $request)
+    {
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'username' =>'required|string|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
         $user = new User();
@@ -44,25 +48,25 @@ public function showLogin(){
     public function check(Request $request)
     {
         $data = Input::except(array('_token'));
-        $user = User::where('username',$request->username)->first();
+        $user = User::where('username', $request->username)->first();
         $rules = array(
-            'username' =>'required|string|max:255',
+            'username' => 'required|string|max:255',
             'password' => 'required|string|min:6',
         );
         $message = array(
             'username.required' => 'The username is required.',
             'password.required' => 'Please Enter A Valid Password',
         );
-        $validator = Validator::make($data,$rules,$message);
-        if($validator->fails(true))
-        {
+        $validator = Validator::make($data, $rules, $message);
+        if ($validator->fails(true)) {
             return Redirect::to('login')->WithErrors($validator);
-        }else{
-            if(Auth::attempt(['username'=>$request->username, 'password'=> $request->password, 'admin'=> 1])) {
+        } else {
+            if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'admin' => 1])) {
                 return Redirect::to('../cars');
-            }elseif (Auth::attempt(['username'=>$request->username, 'password'=> $request->password, 'admin'=> 0])){
+            } elseif (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'admin' => 0])) {
                 return Redirect::to('../carsuser');
-            }else{
+            } else {
+                Session::flash('message', "the username or password is wrong !");
                 return back();
             }
 //            if($user){
@@ -76,6 +80,7 @@ public function showLogin(){
 //            }
         }
     }
+
     public function getLogout()
     {
         Auth::logout();

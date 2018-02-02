@@ -40,7 +40,7 @@ class CarController extends Controller
     public function create()
     {
         $categories = Category::get();
-        return view('cars/create',compact('categories'));
+        return view('cars.create',compact('categories'));
     }
 
 

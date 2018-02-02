@@ -26,4 +26,7 @@
                     @endif
             </div> <!-- list-group / end -->
         </div> <!-- row / end -->
+    <div class="text-center">
+        {{$cars->links()}}
+    </div>
 </div>

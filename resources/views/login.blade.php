@@ -39,9 +39,9 @@
                 @endif
             </div>
             <div class="form-group">
-                @if (isset($error))
+                @if (Session::has('message'))
                     <span class="help-block">
-                        <strong class="alert alert-danger">{{ $error }}</strong>
+                        <strong class="alert alert-danger">{{ Session::get('message') }}</strong>
                     </span>
                 @endif
             </div>
